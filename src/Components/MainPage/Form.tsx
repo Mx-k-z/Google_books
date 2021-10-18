@@ -5,7 +5,7 @@ import Input from './Input'
 const Form: React.FC = () => {
   return (
     <>
-      <div className={'main-image d-flex justify-content-center align-items-center flex-column'}>
+      <div className={'background__image d-flex justify-content-center align-items-center flex-column'}>
         <Header />
         <Input />
       </div>

@@ -4,11 +4,7 @@
   font-size: 1.1rem;
 }
 
-body {
-  overflow-x: hidden;
-}
-
-.main-image {
+.background__image {
   background: url('https://million-wallpapers.ru/wallpapers/2/72/335825362275688/staryj-biblioteka.jpg');
   background-repeat: no-repeat;
   background-position: center;
@@ -19,7 +15,7 @@ body {
   position: relative;
 }
 
-.filter {
+.overlay {
   background-color: rgba(0, 0, 0, 0.6);
   content: '';
   display: block;
@@ -31,33 +27,37 @@ body {
   z-index: 1;
 }
 
-.info {
+.info__results {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 15px;
 }
 
-.container__book {
+.header__empty__body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 25px;
+  margin-top: 15px;
 }
 
-.info__book {
+.container__book {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 10px;
+}
+
+.bookInfo__book {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  margin: 20px;
+  margin: 0 20px;
 }
 
-div.row > h1 {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.book_img {
+  height: 400px;
 }
 
 .back__button {
@@ -73,12 +73,18 @@ div.row > h1 {
   margin: 25px;
 }
 
+.card__image {
+  width: auto;
+  margin: 15px;
+  box-shadow: 0 10px 15px 0;
+}
+
 .subtitles {
   opacity: 0.7;
   text-decoration: underline;
 }
 
-.label {
+.select__label {
   display: flex;
   justify-content: flex-end;
   width: 40vw;
@@ -92,7 +98,19 @@ div.row > h1 {
     align-items: center;
     justify-content: center;
   }
-  .label {
+  .select__label {
     justify-content: center;
+  }
+}
+
+@media screen and (min-width: 1185px) {
+  .image {
+    height: 350px;
+  }
+}
+
+@media screen and (min-width: 1385px) {
+  .image {
+    height: 400px;
   }
 }

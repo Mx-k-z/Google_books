@@ -26,7 +26,7 @@ const Select = () => {
           <option value='Medical'>medical</option>
           <option value='Poetry'>poetry</option>
         </select>
-        <span className={'label'}>Sorting by</span>
+        <span className={'select__label'}>Sorting by</span>
         <select className='form-select' onClick={orderHandler}>
           <option defaultValue={'relevance'}>relevance</option>
           <option value='newest'>newest</option>

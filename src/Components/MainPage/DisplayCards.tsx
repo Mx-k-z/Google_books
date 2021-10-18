@@ -8,12 +8,12 @@ const DisplayCards: React.FC = () => {
   const { totalCount, books } = useTypeSelector(state => state.main)
   return (
     <div>
-      {books.length &&
+      {books.length ?
         <div>
-          <h4 className={'info'}>Find {totalCount} results</h4>
+          <h4 className={'info__results'}>Find {totalCount} results</h4>
           <Cards />
           <LoadingButton />
-        </div>
+        </div> : <h1 className={'header__empty__body'}>Start searching for books...</h1>
       }
     </div>
   )

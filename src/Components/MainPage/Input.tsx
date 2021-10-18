@@ -1,7 +1,7 @@
 import React, { FormEvent } from 'react'
 import { useDispatch } from 'react-redux'
-import {useTypeSelector} from '../../Hooks/useTypeSelector'
-import {fetchBook, getTitleBook} from '../../store/actions'
+import { useTypeSelector } from '../../Hooks/useTypeSelector'
+import { fetchBook, getTitleBook } from '../../store/actions'
 import Select from './Select'
 
 const Input: React.FC = () => {
@@ -11,7 +11,7 @@ const Input: React.FC = () => {
   const bookRequestHandler = (e: FormEvent) => {
     e.preventDefault()
     if (!title) {
-      alert('Пустая строка')
+      alert("A book can't be without a title")
       return null
     }
     dispatch(fetchBook(title, 30, 1, category, order))
