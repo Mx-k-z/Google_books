@@ -46,7 +46,9 @@ export const fetchBook = (
     try {
       dispatch({ type: ActionTypes.FETCH_BOOKS })
       const res: AxiosResponse<any> = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes?q=${bookname}+subject=${category}&maxResults=${maxres}&startIndex=${startindex}&&orderBy=${sorting}&key=${API_KEY}`
+        `https://www.googleapis.com/books/v1/volumes` +
+          `?q=${bookname}+subject=${category}&maxResults=${maxres}` +
+          `&startIndex=${startindex}&orderBy=${sorting}&key=${API_KEY}`
       )
       dispatch(addBook(res.data.items))
       dispatch(setTotalCount(res.data.totalItems))
@@ -66,7 +68,9 @@ export const fetchMoreBook = (
   return async (dispatch: Dispatch<BookAction>) => {
     try {
       const res: AxiosResponse<any> = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes?q=${bookname}&maxResults=${maxresult}&startIndex=${startindex}&key=${API_KEY}`
+        `https://www.googleapis.com/books/v1/volumes` +
+          `?q=${bookname}+subject=${category}&maxResults=${maxresult}` +
+          `&startIndex=${startindex}&orderBy=${sorting}&key=${API_KEY}`
       )
       dispatch(addBook(res.data.items))
       dispatch(setTotalCount(res.data.totalItems))

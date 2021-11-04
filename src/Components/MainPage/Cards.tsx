@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { useTypeSelector } from '../../Hooks/useTypeSelector'
@@ -6,17 +6,22 @@ import { filterByCategory } from '../../store/actions'
 import { filterArrayByCategory } from '../../SubsidiaryFunc/filterArrayByCategory'
 
 const Cards: React.FC = () => {
+  const { filtered, books, category } = useTypeSelector(state => state.main)
   const router = useHistory()
   const dispatch = useDispatch()
-  const { filtered, books, category } = useTypeSelector(state => state.main)
+
+  const memoizedFilteredArr = useCallback(
+    (books: any[], category: string) => filterArrayByCategory(books, category),
+    []
+  )
 
   useEffect(() => {
     if (category === 'all') {
       dispatch(filterByCategory(books))
     } else {
-      dispatch(filterByCategory(filterArrayByCategory(books, category)))
+      dispatch(filterByCategory(memoizedFilteredArr(books, category)))
     }
-  }, [category, books.length])
+  }, [category, books.length, dispatch, memoizedFilteredArr])
 
   return (
     <div className='row row-cols-2 row-cols-md-5 g-3 mx-3'>
@@ -31,9 +36,13 @@ const Cards: React.FC = () => {
                   alt=''
                 />
                 <div className='card-body text-secondary'>
-                  <h4 className='card-title'>{book.volumeInfo.title}</h4>
-                  <p className='card-text'>{book.volumeInfo.categories && book.volumeInfo.categories[0]}</p>
-                  <p className='card-text'>{book.volumeInfo.authors && book.volumeInfo.authors.join(' ')}</p>
+                  <h4 className='card-title'>{book.volumeInfo.title.slice(0, 23) + '...'}</h4>
+                  <p className='card-text'>
+                    {book.volumeInfo.categories ? book.volumeInfo.categories[0] : 'Without Category'}
+                  </p>
+                  <p className='card-text'>
+                    {book.volumeInfo.authors ? book.volumeInfo.authors[0] : 'Without Authors'}
+                  </p>
                   <button className={'btn btn-secondary'} onClick={() => router.push(`/book/${book.id}`)}>
                     About
                   </button>

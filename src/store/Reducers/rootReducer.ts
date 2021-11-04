@@ -15,11 +15,7 @@ export const rootReducer = (state = bookDefState, action: BookAction) => {
     case ActionTypes.GET_TITLE_BOOK:
       return {
         ...state,
-        loading: false,
-        totalCount: state.totalCount,
         title: action.payload,
-        category: state.category,
-        order: state.order,
         books: [],
         filtered: [],
       }
@@ -27,65 +23,22 @@ export const rootReducer = (state = bookDefState, action: BookAction) => {
       return {
         ...state,
         loading: true,
-        totalCount: state.totalCount,
-        category: state.category,
-        order: state.order,
-        title: state.title,
         books: [...state.books],
       }
     case ActionTypes.FETCH_BOOKS_SUCCESS:
       return {
         ...state,
         loading: false,
-        totalCount: state.totalCount,
-        title: state.title,
-        category: state.category,
-        order: state.order,
         books: [...state.books, ...action.payload],
       }
     case ActionTypes.FETCH_BOOKS_TOTALCOUNT:
-      return {
-        ...state,
-        loading: false,
-        totalCount: action.payload,
-        category: state.category,
-        order: state.order,
-        title: state.title,
-        books: [...state.books],
-      }
+      return { ...state, totalCount: action.payload }
     case ActionTypes.FILTER_BY_CATEGORY:
-      return {
-        ...state,
-        loading: false,
-        totalCount: state.totalCount,
-        title: state.title,
-        category: state.category,
-        order: state.order,
-        books: [...state.books],
-        filtered: [...action.payload],
-      }
+      return { ...state, filtered: [...action.payload] }
     case ActionTypes.CHANGE_CATEGORY:
-      return {
-        ...state,
-        loading: false,
-        totalCount: state.totalCount,
-        title: state.title,
-        category: action.payload,
-        order: state.order,
-        books: [...state.books],
-        filtered: [...state.filtered],
-      }
+      return { ...state, category: action.payload }
     case ActionTypes.CHANGE_ORDER:
-      return {
-        ...state,
-        loading: false,
-        totalCount: state.totalCount,
-        title: state.title,
-        category: state.category,
-        order: action.payload,
-        books: [...state.books],
-        filtered: [...state.filtered],
-      }
+      return { ...state, order: action.payload }
     default:
       return state
   }
